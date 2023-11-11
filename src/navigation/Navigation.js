@@ -23,15 +23,14 @@ export default function Navigation() {
         tabBarLabel:"Home",
         tabBarIcon: ({color, size}) => {
           return(
-            <Icon name = 'home' color = {color} size = {size} />
+            <Icon name = 'home' color = {'#264653'} size = {size} />
           )
         }, 
       }}/>
       <Tab.Screen name = 'Store' component={ StoreNavigation } options={{
-        tabBarLabel:"TruxStore", 
         tabBarIcon: ({color, size}) => {
           return(
-            <Icon name = "store" size = {size} color = {color} />
+            <Icon name = "store" size = {size} color = {'#264653'} />
           )
         },
       }}/>
@@ -39,7 +38,7 @@ export default function Navigation() {
         tabBarLabel: "Account",
         tabBarIcon: ({color,size}) => {
           return(
-            <Icon name = "user" size = {size} color = {color}></Icon>
+            <Icon name = "user" size = {size} color = {'#264653'} solid></Icon>
           )
         }
       }}/>
