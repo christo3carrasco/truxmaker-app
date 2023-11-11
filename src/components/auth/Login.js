@@ -8,25 +8,25 @@ export default function Login(props) {
         password:'', 
     })
   return (
-    <ScrollView styles = {styles.LoginContainer} >
-        <View style = {styles.LoginInfoContainer}>
-            <Text style = {styles.LoginTitle}>Iniciar Sesión</Text>
-            <Text style = {styles.LoginSubtitle}>Disfruta de todas las novedades que tenemos dispuestas para ti!</Text>
+    <ScrollView styles = {styles.Container} >
+        <View style = {styles.InfoContainer}>
+            <Text style = {styles.Title}>Iniciar Sesión</Text>
+            <Text style = {styles.Subtitle}>Disfruta de todas las novedades que tenemos dispuestas para ti!</Text>
         </View>
-        <View style = {styles.LoginForm}>
-            <TextInput style = {styles.Input} placeholder='example@gmail.com'></TextInput>
+        <View style = {styles.Form}>
+            <TextInput style = {styles.Input} placeholder='correo@gmail.com'></TextInput>
             <TextInput style = {styles.Input} placeholder='*****************'></TextInput>
-            <Pressable style = {styles.LoginButton}>
-                <Text style = {styles.LoginButtonText}>Login</Text>
+            <Pressable style = {styles.Button}>
+                <Text style = {styles.ButtonText}>Login</Text>
             </Pressable>
             <Text style = {styles.MoreOptionsSeparator}>o</Text>
-            <Pressable style={styles.LoginButton}>
+            <Pressable style={styles.Button}>
                 <Icon name='google' size={20} color={'white'}/>
-                <Text style = {styles.LoginButtonText}>Continuar con google</Text>
+                <Text style = {styles.ButtonText}>Continuar con google</Text>
             </Pressable>
-            <Pressable style = {styles.LoginButton}>
+            <Pressable style = {styles.Button}>
                 <Icon name='facebook' size={20} color={'white'}/>
-                <Text style = {styles.LoginButtonText}>Continuar con facebook</Text>
+                <Text style = {styles.ButtonText}>Continuar con facebook</Text>
             </Pressable>
         </View>
     </ScrollView>
@@ -34,27 +34,27 @@ export default function Login(props) {
   )
 }
 const styles = StyleSheet.create({
-    LoginContainer:{
+    Container:{
         position:'relative', 
         width:'100%',
         height:'400',
     },
-    LoginInfoContainer:{
+    InfoContainer:{
         padding:15,
         paddingTop:50,
         backgroundColor:'#264653', 
         height:'auto',
     },
-    LoginTitle:{
+    Title:{
         fontSize:35,
         fontWeight:'900',
         color:'#e9c46b',
     }, 
-    LoginSubtitle:{
+    Subtitle:{
         fontWeight:'700',
         color:'#e9c46b',
     },
-    LoginForm:{
+    Form:{
         position:'relative',
         backgroundColor:'#F7F7F7',
         width:'100%',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         height:60,
         padding:15,
     },
-    LoginButton:{
+    Button:{
         display:'flex',
         flexDirection:'row',
         gap:10,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#264653',
         padding:10,
     },
-    LoginButtonText:{
+    ButtonText:{
         color:'white',
         fontWeight:'700',
     },
