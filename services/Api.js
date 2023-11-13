@@ -5,6 +5,7 @@ export async function getAllProductsApi (endPointUrl){
         const url = `${API_HOST}/products?offset=0&limit=6`
         const response = await fetch( endPointUrl || url); 
         const result = await response.json(); 
+        console.log(result);
         return result; 
     } catch (error) {
         console.log(error);

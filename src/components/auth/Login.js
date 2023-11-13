@@ -1,12 +1,21 @@
 import { View, Text, StyleSheet, Pressable, TextInput, ScrollView } from 'react-native'
+import { useData } from '../../hooks/useData';
 import React, {useState} from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function Login(props) {
-    const [user,SetUser] = useState({
+    const {Login} = useData(); 
+    const [tempUser,SetTempUser] = useState({
         email:'', 
         password:'', 
     })
+    const handleChange = (e, nameInput) => {
+        SetTempUser({...tempUser, [nameInput]:e})
+    }
+    const handleSubmit = () => {
+        Login(tempUser.email, tempUser.password); 
+    }
+
   return (
     <ScrollView styles = {styles.Container} >
         <View style = {styles.InfoContainer}>
@@ -14,9 +23,9 @@ export default function Login(props) {
             <Text style = {styles.Subtitle}>Disfruta de todas las novedades que tenemos dispuestas para ti!</Text>
         </View>
         <View style = {styles.Form}>
-            <TextInput style = {styles.Input} placeholder='correo@gmail.com'></TextInput>
-            <TextInput style = {styles.Input} placeholder='*****************'></TextInput>
-            <Pressable style = {styles.Button}>
+            <TextInput style = {styles.Input} placeholder='correo@gmail.com' onChangeText={(e)=>{handleChange(e,'email')}}/>
+            <TextInput style = {styles.Input} placeholder='*****************'  onChangeText={(e)=>{handleChange(e,'password')}}/>
+            <Pressable style = {styles.Button} onPress={()=>{handleSubmit()}}>
                 <Text style = {styles.ButtonText}>Login</Text>
             </Pressable>
             <Text style = {styles.MoreOptionsSeparator}>o</Text>

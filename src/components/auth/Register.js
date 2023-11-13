@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, TextInput, Pressable } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useData } from '../../hooks/useData';
 
 export default function Register() {
+  const { Register } = useData(); 
+  const [temRegisterUser, setTempResgisterUser] = useState(
+    {
+        firstNames:'', 
+        lastNames:'', 
+        email:'', 
+        password:'', 
+    }
+    ); 
+    const handleChange = (e, nameInput) => {
+        setTempResgisterUser({
+            ...temRegisterUser,
+            [nameInput]:e
+        }); 
+        console.log(temRegisterUser);
+    }
+    const handleSubmit = () => {
+        Register(temRegisterUser.firstNames, temRegisterUser.lastNames, temRegisterUser.email, temRegisterUser.password); 
+     }
   return (
     <ScrollView styles = {styles.Container} >
         <View style = {styles.InfoContainer}>
@@ -10,11 +30,11 @@ export default function Register() {
             <Text style = {styles.Subtitle}>Únete a nosotros y disfruta de todas las novedades que tenemos dispuestas para ti!</Text>
         </View>
         <View style = {styles.Form}>
-            <TextInput style = {styles.Input} placeholder='Nombres'></TextInput>
-            <TextInput style = {styles.Input} placeholder='Apellidos'></TextInput>
-            <TextInput style = {styles.Input} placeholder='correo@gmail.com'></TextInput>
-            <TextInput style = {styles.Input} placeholder='*****************'></TextInput>
-            <Pressable style = {styles.Button}>
+            <TextInput style = {styles.Input} placeholder='Nombres' onChangeText={(e)=>{handleChange(e,'firstNames')}}></TextInput>
+            <TextInput style = {styles.Input} placeholder='Apellidos' onChangeText={(e) => {handleChange(e,'lastNames')}}></TextInput>
+            <TextInput style = {styles.Input} placeholder='correo@gmail.com' onChangeText={(e) => {handleChange(e,'email')}}></TextInput>
+            <TextInput style = {styles.Input} placeholder='*****************' onChangeText={(e) => {handleChange(e,'password')}}></TextInput>
+            <Pressable style = {styles.Button} onPress={()=>handleSubmit()}>
                 <Text style = {styles.ButtonText}>Registrarse</Text>
             </Pressable>
         </View>

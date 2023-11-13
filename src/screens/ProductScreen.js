@@ -16,7 +16,6 @@ export default function ProductScreen(props) {
     const Product = await getOneProductApi(params.id);
     setProduct(Product); 
   }
-  console.log(product);
   return (
     <ScrollView style = {styles.Product}>
       {
