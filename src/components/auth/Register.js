@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, TextInput, Pressable } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useData } from '../../hooks/useData';
+import { createUserApi } from '../../../services/Firebase/FirestoreFuncions';
 
 export default function Register() {
-  const { Register } = useData(); 
+  const { RegisterWithEmailAndPassword, userCredentials } = useData(); 
+  const [registerDataState, setRegisterDataState] = useState(false); 
   const [temRegisterUser, setTempResgisterUser] = useState(
     {
-        firstNames:'', 
-        lastNames:'', 
+        id:'', 
+        firstName:'', 
+        lastName:'', 
         email:'', 
         password:'', 
     }
@@ -18,11 +21,33 @@ export default function Register() {
             ...temRegisterUser,
             [nameInput]:e
         }); 
-        console.log(temRegisterUser);
     }
-    const handleSubmit = () => {
-        Register(temRegisterUser.firstNames, temRegisterUser.lastNames, temRegisterUser.email, temRegisterUser.password); 
-     }
+    const handleSubmit = async() => {
+        setRegisterDataState(true); 
+        await RegisterWithEmailAndPassword(temRegisterUser.email, temRegisterUser.password); 
+    }
+    // set async info 
+    useEffect(()=>{ 
+        if (userCredentials != null && registerDataState) {
+            setTempResgisterUser({...temRegisterUser, id:userCredentials.uid}); 
+        }
+    },[userCredentials])
+    // send info 
+    useEffect(()=>{
+        if (temRegisterUser.id != '') {
+            createUserApi(temRegisterUser); 
+            setTempResgisterUser(
+                {
+                    id:'', 
+                    firstName:'', 
+                    lastName:'', 
+                    email:'', 
+                    password:'', 
+                }
+            )
+        }
+    },[temRegisterUser])
+
   return (
     <ScrollView styles = {styles.Container} >
         <View style = {styles.InfoContainer}>
@@ -30,10 +55,10 @@ export default function Register() {
             <Text style = {styles.Subtitle}>Únete a nosotros y disfruta de todas las novedades que tenemos dispuestas para ti!</Text>
         </View>
         <View style = {styles.Form}>
-            <TextInput style = {styles.Input} placeholder='Nombres' onChangeText={(e)=>{handleChange(e,'firstNames')}}></TextInput>
-            <TextInput style = {styles.Input} placeholder='Apellidos' onChangeText={(e) => {handleChange(e,'lastNames')}}></TextInput>
-            <TextInput style = {styles.Input} placeholder='correo@gmail.com' onChangeText={(e) => {handleChange(e,'email')}}></TextInput>
-            <TextInput style = {styles.Input} placeholder='*****************' onChangeText={(e) => {handleChange(e,'password')}}></TextInput>
+            <TextInput style = {styles.Input} placeholder='Nombres' onChangeText={(e)=>{handleChange(e,'firstName')}} value={temRegisterUser.firstName}></TextInput>
+            <TextInput style = {styles.Input} placeholder='Apellidos' onChangeText={(e) => {handleChange(e,'lastName')}} value={temRegisterUser.lastName}></TextInput>
+            <TextInput style = {styles.Input} placeholder='correo@gmail.com' onChangeText={(e) => {handleChange(e,'email')}} value={temRegisterUser.email}></TextInput>
+            <TextInput style = {styles.Input} placeholder='*****************' onChangeText={(e) => {handleChange(e,'password')}} value={temRegisterUser.password}></TextInput>
             <Pressable style = {styles.Button} onPress={()=>handleSubmit()}>
                 <Text style = {styles.ButtonText}>Registrarse</Text>
             </Pressable>

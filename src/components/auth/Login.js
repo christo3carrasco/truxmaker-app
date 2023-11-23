@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function Login(props) {
-    const {Login} = useData(); 
+    const { LoginWithEmailAndPassword } = useData(); 
     const [tempUser,SetTempUser] = useState({
         email:'', 
         password:'', 
@@ -12,8 +12,8 @@ export default function Login(props) {
     const handleChange = (e, nameInput) => {
         SetTempUser({...tempUser, [nameInput]:e})
     }
-    const handleSubmit = () => {
-        Login(tempUser.email, tempUser.password); 
+    const handleSubmit = async() => {
+        await LoginWithEmailAndPassword(tempUser.email, tempUser.password); 
     }
 
   return (

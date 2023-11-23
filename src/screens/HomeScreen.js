@@ -5,9 +5,10 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useData } from '../hooks/useData';
 
 export default function HomeScreen() {
-  const { user } = useData();  
+  const { userInfoDb } = useData(); 
   return (
     <SafeAreaView style= {styles.ContainerHome}>
+      <Text style = {styles.User}>Hola! {userInfoDb != null ? userInfoDb.firstName: "Default"}</Text>
       <Text style = {styles.Title}>Bienvenido a TruxStore !</Text>
       <Text style = {styles.Phrase}>Tenemos todos los productos que necesitas en un solo lugar</Text>
       <Pressable style = {styles.Button}>
@@ -16,7 +17,6 @@ export default function HomeScreen() {
         </Text>
         <Icon name = {'store'} color={'white'}/>
       </Pressable>
-      <Text style = {styles.User}>Hola! {user.firstName}</Text>
     </SafeAreaView>
   )
 }
