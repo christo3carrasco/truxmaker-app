@@ -1,11 +1,22 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 // components
 import UserProfile from '../components/auth/UserProfile';
 import AuthForm from '../components/auth/AuthForm';
 
+// hook 
+import { useData } from '../hooks/useData';
+
 export default function AccountScreen() {
   const [data, setData] = useState(false); 
+  const { userInfoDb } = useData(); 
+
+  useEffect(()=>{
+    (()=>{setData(userInfoDb)
+      console.log(userInfoDb);
+    })()
+  },[userInfoDb])
+
   return (
     <View style = {styles.AccountContainer}>
       {data ? <UserProfile/> : <AuthForm />}
