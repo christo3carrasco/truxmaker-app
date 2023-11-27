@@ -2,11 +2,25 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from "react-native-vector-icons/FontAwesome5"
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 // Context 
 import { useData } from '../../hooks/useData.js'
 export default function UserProfile() {
   const { userInfoDb } = useData(); 
+  const navigate = useNavigation(); 
+  const goToHistory = () =>{
+    navigate.navigate('History')
+  }
+  const goToEditInfo = () =>{
+    navigate.navigate('EditInfo')
+  }
+  const goToFavorites = () =>{
+    navigate.navigate('Favorites')
+  }
+  const goToCards = () =>{
+    navigate.navigate('Cards')
+  }
   return (
     <SafeAreaView>
       <View style = {styes.FirstameContainerStyle}>
@@ -16,26 +30,26 @@ export default function UserProfile() {
       </View>
       </View>
       <View style = {styes.ContainerOptions}> 
-        <View style = {styes.CardHistory}>
+        <Pressable style = {styes.CardHistory} key={1} onPress={()=>{goToHistory()}}>
           <Icon name='history' size={30} color={'white'}/> 
           <Text style = {styes.CardHistoryTextTitle}>Historial de compras</Text>
           <Text style = {styes.CardHistoryTextSubTitle}>Da un vistazo a todas las compras anteriores</Text>
-        </View>
-        <View style = {styes.CardCreditCard}>
+        </Pressable>
+        <Pressable style = {styes.CardCreditCard} onPress={()=>{goToCards()}}>
           <Icon name='credit-card' size={30} color={'black'}/>
           <Text style = {styes.CardCardTextTitle}>Añadir tarjeta</Text>
           <Text style = {styes.CardCardTextSubTitle}>Añade una nueva tarjeta para realizar todas tus compras</Text>
-        </View>
-        <View style = {styes.CardEditInfo}>
+        </Pressable>
+        <Pressable style = {styes.CardEditInfo} onPress={()=>{goToEditInfo()}}>
           <Icon name='edit' size={30} color={'white'}/>
           <Text style = {styes.CardEditTextTitle}>Editar Información</Text>
           <Text style = {styes.CardEditTextSubTitle}>Edita tu información de contacto queremos concerta más</Text>
-        </View>
-        <View style = {styes.CardFavorites}>
+        </Pressable>
+        <Pressable style = {styes.CardFavorites} onPress={()=>{goToFavorites()}}>
           <Icon name='heart' size={30} color={'white'}/>
           <Text style = {styes.CardFavoritesTextTitle}>Tus favoritos</Text>
           <Text style = {styes.CardFavoritesTextSubTitle}>Mira tu lista de productos favoritos</Text>
-        </View>
+        </Pressable>
       </View>
   
     </SafeAreaView>
@@ -71,9 +85,14 @@ const styes = StyleSheet.create({
     marginTop:0, 
   },
   ContainerOptions:{
-    margin:20,
+    // borderStyle:'solid',
+    // borderWidth:1,
+    padding:10,
+    width:'100%',
+    height:'70%',
     display:'flex',
     flexDirection:'row',
+    justifyContent:'center',
     flexWrap:'wrap',
     gap:10,
   }, 

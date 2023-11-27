@@ -1,30 +1,38 @@
 
 import { View, Text, StyleSheet, TouchableWithoutFeedback, Image, Pressable} from 'react-native'; 
 import { useNavigation } from '@react-navigation/native';
+import { useData } from '../../hooks/useData';
+import { get_uuid } from '../../../utils/generateUuid';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import React from 'react'
 
 export default function ProductCard(props) {
   const { product } = props; 
   const navigation = useNavigation();  
+  const { setCart, cart, cartArrayProducts, setCartArrayProducts, addProductToCart } = useData(); 
   const goToProduct = () =>{
-    navigation.navigate('Product', {id:product.item.id}); 
+    navigation.navigate('Product', {id: product.item._id}); 
   }
+  // const addProductToCart = () => {
+  //   setCartArrayProducts([...cartArrayProducts, product.item.nombre])
+  //   setCart({id:get_uuid(),productsCart:cartArrayProducts});
+  //   console.log(cart);
+  // }
   return (
     <TouchableWithoutFeedback onPress={goToProduct}>
       <View style = {styles.Card}>
-        <Image source={{uri:product.item.image}} style = {styles.ProductImage}/>
+        <Image source={{uri:product.item.imagen}} style = {styles.ProductImage}/>
         <View style = {styles.ContainerInfoProduct}>
-          <Text style={styles.CardTitle}>{product.item.title}</Text>
+          <Text style={styles.CardTitle}>{product.item.nombre}</Text>
           <Text>
               {product.item.category}
           </Text>
         </View>
         <View style={styles.ContainerPay}>
           <Text style = {styles.Price}>
-            S/.{product.item.price}
+            S/.{product.item.precio}
           </Text>
-          <Pressable style = {styles.Button}>
+          <Pressable style = {styles.Button} onPress={()=>{addProductToCart(product)}}>
             <Text style = {styles.ButtonText}>Add</Text>
             <Icon style = {styles.ButtonIcon} name='plus' color={'white'} ></Icon>
           </Pressable>

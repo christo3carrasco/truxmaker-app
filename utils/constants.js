@@ -1,4 +1,4 @@
-export const API_HOST= "https://fakestoreapi.com"; 
+export const API_HOST= "https://truxmaker.azurewebsites.net/api"; 
 
 //Colors 
 export const COLORS = {
