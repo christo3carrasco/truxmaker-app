@@ -8,12 +8,14 @@ import AuthForm from '../components/auth/AuthForm';
 import { useData } from '../hooks/useData';
 
 export default function AccountScreen() {
-  const [data, setData] = useState(false); 
+  const [data, setData, user] = useState(false); 
   const { userInfoDb } = useData(); 
 
   useEffect(()=>{
     (()=>{setData(userInfoDb)
-      console.log(userInfoDb);
+      if (userInfoDb.id == '') {
+        setData(null)
+      }
     })()
   },[userInfoDb])
 

@@ -16,13 +16,14 @@ export default function ProductScreen(props) {
     const Product = await getOneProductApi(params.id);
     setProduct(Product); 
   }
+  console.log(product);
   return (
     <ScrollView style = {styles.Product}>
       {
         product != null ?(
           <View style = {styles.ProdutContainer}>
-            <Text style = {styles.ProductTitle}>{product.title}</Text>
-            <Image source={{uri:product.image}} style = {styles.ProductImage}/>
+            <Text style = {styles.ProductTitle}>{product.nombre}</Text>
+            <Image source={{uri:product.imagen}} style = {styles.ProductImage}/>
             <Text style = {styles.TitleDescription}>Descripción</Text>
             <Text style = {styles.ProductDescription}>{product.description}</Text>
             <Text style = {styles.TitleDescription}>Categoria</Text>
@@ -32,7 +33,7 @@ export default function ProductScreen(props) {
                 <Text style = {styles.ButtonText}>Añadir al carrito</Text>
                 <Icon name='shopping-cart' color={'white'}/>
               </View>
-              <Text style = {styles.ButtonPrice}>S/.{product.price}</Text>
+              <Text style = {styles.ButtonPrice}>S/.{product.precio}</Text>
             </Pressable>
           </View>
           ):<ActivityIndicator style = {styles.Spinner} size={'large'} />

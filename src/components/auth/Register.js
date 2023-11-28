@@ -14,6 +14,7 @@ export default function Register() {
         lastName:'', 
         email:'', 
         password:'', 
+        historyCartArray:[], 
     }
     ); 
     const handleChange = (e, nameInput) => {
@@ -43,6 +44,7 @@ export default function Register() {
                     lastName:'', 
                     email:'', 
                     password:'', 
+                    historyCartArray:[""],
                 }
             )
         }

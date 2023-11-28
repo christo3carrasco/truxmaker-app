@@ -4,7 +4,8 @@ import React, {useState} from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function Login(props) {
-    const { LoginWithEmailAndPassword } = useData(); 
+    const { LoginWithEmailAndPassword, LoginWithGoogleAccount } = useData(); 
+    // Login with email and password
     const [tempUser,SetTempUser] = useState({
         email:'', 
         password:'', 
@@ -14,6 +15,10 @@ export default function Login(props) {
     }
     const handleSubmit = async() => {
         await LoginWithEmailAndPassword(tempUser.email, tempUser.password); 
+    }
+    // Login with Google
+    const handleSubmitGoogle = async() => {
+        // await LoginWithGoogleAccount(); 
     }
 
   return (
@@ -29,7 +34,7 @@ export default function Login(props) {
                 <Text style = {styles.ButtonText}>Login</Text>
             </Pressable>
             <Text style = {styles.MoreOptionsSeparator}>o</Text>
-            <Pressable style={styles.Button}>
+            <Pressable style={styles.Button} onPress={()=>{handleSubmitGoogle()}}>
                 <Icon name='google' size={20} color={'white'}/>
                 <Text style = {styles.ButtonText}>Continuar con google</Text>
             </Pressable>

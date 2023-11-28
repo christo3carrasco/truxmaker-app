@@ -5,10 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useData } from '../hooks/useData';
 
 export default function HomeScreen() {
-  const { userInfoDb } = useData(); 
+  const { userInfoDb, LogOutWithEmailAndPassword } = useData();
   return (
     <SafeAreaView style= {styles.ContainerHome}>
-      <Text style = {styles.User}>Hola! {userInfoDb != null ? userInfoDb.firstName: "Default"}</Text>
+      <Pressable style = {styles.User} onPress={()=>{LogOutWithEmailAndPassword()}}>
+        <Text style = {styles.UserText}>Hola! {userInfoDb.id != '' ? userInfoDb.firstName: "de nuevo, inicia sesión"}</Text>
+      </Pressable>
       <Text style = {styles.Title}>Bienvenido a TruxStore !</Text>
       <Text style = {styles.Phrase}>Tenemos todos los productos que necesitas en un solo lugar</Text>
       <Pressable style = {styles.Button}>
@@ -65,6 +67,10 @@ const styles = StyleSheet.create({
     borderRadius:10,
   }, 
   User:{
+    borderStyle:'solid',     
+    borderWidth:1,
+    padding: 5, 
+    borderRadius: 5,
     position:'absolute', 
     top:40,
     right:2,

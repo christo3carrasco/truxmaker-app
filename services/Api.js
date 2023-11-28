@@ -2,7 +2,7 @@ import { API_HOST } from "../utils/constants.js";
 
 export async function getAllProductsApi (endPointUrl){
     try {
-        const url = `${API_HOST}/products?offset=0&limit=6`
+        const url = `${API_HOST}/products`
         const response = await fetch( endPointUrl || url); 
         const result = await response.json(); 
         console.log(result);
