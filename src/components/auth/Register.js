@@ -15,6 +15,7 @@ export default function Register() {
         email:'', 
         password:'', 
         historyCartArray:[], 
+        CardsArray:[],
     }
     ); 
     const handleChange = (e, nameInput) => {

@@ -1,6 +1,4 @@
 import { View, Text } from 'react-native'
-import React from 'react'
-
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 //Tab Navigation
@@ -13,14 +11,16 @@ import Icon from "react-native-vector-icons/FontAwesome5"
 import AccountNavigation from './AccountNavigation'
 import StoreNavigation from './StoreNavigation'
 import HomeNavigation from './HomeNavigation'
+import React, { useState } from 'react'
 
 const Tab = createBottomTabNavigator(); 
-
 export default function Navigation() {
+  const [state, setstate] = useState(0);
   return (
     <Tab.Navigator>
       <Tab.Screen name = 'Home' component={ HomeNavigation } options={{
         tabBarLabel:"Home",
+        tabBarBadge:`${state}`,
         tabBarIcon: ({color, size}) => {
           return(
             <Icon name = 'home' color = {'#264653'} size = {size} />

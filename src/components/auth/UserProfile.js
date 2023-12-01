@@ -31,24 +31,24 @@ export default function UserProfile() {
       </View>
       <View style = {styes.ContainerOptions}> 
         <Pressable style = {styes.CardHistory} key={1} onPress={()=>{goToHistory()}}>
-          <Icon name='history' size={30} color={'white'}/> 
+          <Icon name='history' size={30} color={'#333333'}/> 
           <Text style = {styes.CardHistoryTextTitle}>Historial de compras</Text>
-          <Text style = {styes.CardHistoryTextSubTitle}>Da un vistazo a todas las compras anteriores</Text>
+          {/* <Text style = {styes.CardHistoryTextSubTitle}>Da un vistazo a todas las compras anteriores</Text> */}
         </Pressable>
         <Pressable style = {styes.CardCreditCard} onPress={()=>{goToCards()}}>
-          <Icon name='credit-card' size={30} color={'black'}/>
+          <Icon name='credit-card' size={30} color={'#333333'}/>
           <Text style = {styes.CardCardTextTitle}>Añadir tarjeta</Text>
-          <Text style = {styes.CardCardTextSubTitle}>Añade una nueva tarjeta para realizar todas tus compras</Text>
+          {/* <Text style = {styes.CardCardTextSubTitle}>Añade una nueva tarjeta para realizar todas tus compras</Text> */}
         </Pressable>
         <Pressable style = {styes.CardEditInfo} onPress={()=>{goToEditInfo()}}>
-          <Icon name='edit' size={30} color={'white'}/>
+          <Icon name='edit' size={30} color={'#333333'}/>
           <Text style = {styes.CardEditTextTitle}>Editar Información</Text>
-          <Text style = {styes.CardEditTextSubTitle}>Edita tu información de contacto queremos concerta más</Text>
+          {/* <Text style = {styes.CardEditTextSubTitle}>Edita tu información de contacto queremos concerta más</Text> */}
         </Pressable>
         <Pressable style = {styes.CardFavorites} onPress={()=>{goToFavorites()}}>
-          <Icon name='heart' size={30} color={'white'}/>
+          <Icon name='heart' size={30} color={'#333333'}/>
           <Text style = {styes.CardFavoritesTextTitle}>Tus favoritos</Text>
-          <Text style = {styes.CardFavoritesTextSubTitle}>Mira tu lista de productos favoritos</Text>
+          {/* <Text style = {styes.CardFavoritesTextSubTitle}>Mira tu lista de productos favoritos</Text> */}
         </Pressable>
       </View>
   
@@ -62,7 +62,7 @@ const styes = StyleSheet.create({
     gap:6,
     width:'100%',
     height:'25%',
-    backgroundColor:'black',
+    backgroundColor:'#cecece',
     justifyContent:'center',
   },
   FirstNameTextStyle:{
@@ -79,7 +79,7 @@ const styes = StyleSheet.create({
     backgroundColor:'white',
     marginLeft:20,
     fontWeight:'400',
-    borderRadius:15,
+    borderRadius:10,
   },
   EmailContainerStyle:{
     marginTop:0, 
@@ -91,23 +91,24 @@ const styes = StyleSheet.create({
     width:'100%',
     height:'70%',
     display:'flex',
-    flexDirection:'row',
-    justifyContent:'center',
-    flexWrap:'wrap',
+    flexDirection:'column',
+    justifyContent:'start',
     gap:10,
   }, 
   CardHistory:{
     display:'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+    width:'100%',
     gap:10,
-    width:'45%',
-    backgroundColor:'#374151', 
+    backgroundColor:'#efefef', 
     padding:15,
-    borderRadius:20,
+    borderRadius:10,
   },
   CardHistoryTextTitle:{
-    fontWeight:'900', 
+    fontWeight:'400', 
     fontSize:20,
-    color:'white',
+    color:'#333333',
   },
   CardHistoryTextSubTitle:{
     color:'white',
@@ -115,16 +116,18 @@ const styes = StyleSheet.create({
   },
   CardCreditCard:{
     display:'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+    width:'100%',
     gap:10,
-    width:'45%',
-    backgroundColor:'#E0D0C0', 
+    backgroundColor:'#ffeac6', 
     padding:15,
-    borderRadius:20,
+    borderRadius:10,
   },
   CardCardTextTitle:{
-    fontWeight:'900', 
+    fontWeight:'400', 
     fontSize:20,
-    color:'black',
+    color:'#333333',
   },
   CardCardTextSubTitle:{
     color:'black',
@@ -132,16 +135,18 @@ const styes = StyleSheet.create({
   },
   CardEditInfo:{
     display:'flex',
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+    width:'100%',
     gap:10,
-    width:'45%',
-    backgroundColor:'#053B50', 
+    backgroundColor:'#c4e7ff', 
     padding:15,
-    borderRadius:20,
+    borderRadius:10,
   },
   CardEditTextTitle:{
-    fontWeight:'900', 
+    fontWeight:'400', 
     fontSize:20,
-    color:'white',
+    color:'#333333',
   },
   CardEditTextSubTitle:{
     color:'white',
@@ -150,15 +155,17 @@ const styes = StyleSheet.create({
   CardFavorites:{
     display:'flex',
     gap:10,
-    width:'45%',
-    backgroundColor:'#ED80B8', 
+    flexDirection:'row-reverse',
+    justifyContent:'space-between',
+    width:'100%',
+    backgroundColor:'#ffcef2', 
     padding:15,
-    borderRadius:20,
+    borderRadius:10,
   },
   CardFavoritesTextTitle:{
-    fontWeight:'900', 
+    fontWeight:'400', 
     fontSize:20,
-    color:'white',
+    color:'#333333',
   },
   CardFavoritesTextSubTitle:{
     color:'white',
