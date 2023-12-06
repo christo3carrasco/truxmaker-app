@@ -25,6 +25,7 @@ export const ProviderContext = ({children}) => {
   const [userInfoDb, setUserInfoDB] = useState(user); 
   const [cartArrayProducts, setCartArrayProducts] = useState([])
   const [totalCart, setTotalCart] = useState(0.0); 
+  const [date, setDate] = useState(); 
   const [cart, setCart] = useState({}); 
   const [isLoading, setIsLoading] = useState(); 
 
