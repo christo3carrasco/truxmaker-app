@@ -1,24 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { CreditCardInput } from 'react-native-credit-card-input'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Field } from 'formik'
 import { Modal } from 'react-native-web'
-import { updateListCardsOnUser } from '../../../../services/Firebase/FirestoreFuncions'
+import { updateCardsUserApi } from '../../../../services/Firebase/FirestoreFuncions'
+import { useData } from '../../../hooks/useData.js'
 import CardFormModal from './CardFormModal'
-import {useData} from '../../../hooks/useData.js'
+import { get_uuid } from '../../../../utils/generateUuid'
 
 export default function CardForm() {
-    const { userInfoDb } = useData();
+    const { userInfoDb, setIsLoading } = useData();
     const [status, setStatus] = useState(null)
     const [card, setCard] = useState({
         number:'',
         cvc:'',
         expiry:'',
         type:'',
+        idCard:'',
     }); 
+
+    const cardUid = get_uuid(); 
+    console.log(cardUid);
+    //Listener 
+    const [addCardToDB, setAddCardToDB] = useState(false)
     const [isVisible, setIsVisible] = useState(false); 
+
+
     _onChange = (formData) => {
         setStatus(formData.status)
         setCard(formData.values)
@@ -26,11 +35,21 @@ export default function CardForm() {
         console.log(status);
     };
 
-    const handleSubmit = () => {
-        try {            
-            if (status.cvc != "invomplete", status.expiry != "incomplete",status.number != "incomplete" ) {            
-                updateListCardsOnUser(userInfoDb.id,card);
+    //send cardinfo
+    useEffect(()=>{
+        (async()=>{
+            if (card.idCard != "" && addCardToDB) {
+                await updateCardsUserApi(userInfoDb.id,card,"add");
                 setIsVisible(!isVisible); 
+            }
+        })()
+    },[addCardToDB, card.idCard])
+    
+    const handleSubmit = async() => {
+        try {            
+            if (status.cvc != "invomplete", status.expiry != "incomplete",status.number != "incomplete" ) {   
+                setCard({...card,"idCard":cardUid})
+                setAddCardToDB(!addCardToDB);          
             }
         } catch (error) {
             console.log(error);

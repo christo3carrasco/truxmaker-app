@@ -73,7 +73,7 @@ export const getUserHistoryCarts = async (userId) => {
 }; 
 
 // Cards
-export const updateListCardsOnUser = async (userId, card) => {
+export const updateCardsUserApi = async (userId, card, typeUpdate) => {
   try {
        const getDataUser = await getUserByIdApi(userId); 
     if (!card) {
@@ -83,11 +83,20 @@ export const updateListCardsOnUser = async (userId, card) => {
     const userRef = await getDocs(query(collection(db, 'USERS'), where("id", "==", userId)));
     if (!userRef.empty) {
       const userDocumentId = userRef.docs[0].id;
-      const newData = {
-       CardsArray:[...getDataUser.CardsArray, card],
-     };
-      console.log(userDocumentId, newData);
-      await updateDoc(doc(db, 'USERS', userDocumentId), newData);
+      // Aqui solo recibe una card
+      if (typeUpdate === "add" ) {        
+        const newData = {
+         CardsArray:[...getDataUser.CardsArray, card],
+        };
+        await updateDoc(doc(db, 'USERS', userDocumentId), newData);
+      }
+      // Aqui recibe todo el array de cards
+      if (typeUpdate === "delete" ) {        
+        const newData = {
+         CardsArray:card,
+        };
+        await updateDoc(doc(db, 'USERS', userDocumentId), newData);
+      }
       console.log('Documento de usuario actualizado exitosamente');
     } else {
       console.log('No se encontró ningún usuario con ese ID.');

@@ -7,6 +7,7 @@ import { createUserApi } from '../../../services/Firebase/FirestoreFuncions';
 export default function Register() {
   const { RegisterWithEmailAndPassword, userCredentials } = useData(); 
   const [registerDataState, setRegisterDataState] = useState(false); 
+  const [ error, setError ] = useState(null); 
   const [temRegisterUser, setTempResgisterUser] = useState(
     {
         id:'', 
@@ -26,7 +27,14 @@ export default function Register() {
     }
     const handleSubmit = async() => {
         setRegisterDataState(true); 
-        await RegisterWithEmailAndPassword(temRegisterUser.email, temRegisterUser.password); 
+        const tempErrorMessage = await RegisterWithEmailAndPassword(temRegisterUser.email, temRegisterUser.password); 
+        console.log(typeof(tempErrorMessage));
+        if (tempErrorMessage === String) {
+            setError(tempErrorMessage); 
+            setTimeout(()=>{
+                setError(null)
+            },4000)
+        }
     }
     // set async info 
     useEffect(()=>{ 
@@ -61,10 +69,17 @@ export default function Register() {
             <TextInput style = {styles.Input} placeholder='Nombres' onChangeText={(e)=>{handleChange(e,'firstName')}} value={temRegisterUser.firstName}></TextInput>
             <TextInput style = {styles.Input} placeholder='Apellidos' onChangeText={(e) => {handleChange(e,'lastName')}} value={temRegisterUser.lastName}></TextInput>
             <TextInput style = {styles.Input} placeholder='correo@gmail.com' onChangeText={(e) => {handleChange(e,'email')}} value={temRegisterUser.email}></TextInput>
-            <TextInput style = {styles.Input} placeholder='*****************' onChangeText={(e) => {handleChange(e,'password')}} value={temRegisterUser.password}></TextInput>
+            <TextInput  secureTextEntry = {true} style = {styles.Input} placeholder='*****************' onChangeText={(e) => {handleChange(e,'password')}} value={temRegisterUser.password}></TextInput>
             <Pressable style = {styles.Button} onPress={()=>handleSubmit()}>
                 <Text style = {styles.ButtonText}>Registrarse</Text>
             </Pressable>
+            {
+                error != null?(<>
+                    <Text>{error}</Text>
+                </>):(<>
+                </>) 
+            }
+            <></>
         </View>
     </ScrollView>
   )

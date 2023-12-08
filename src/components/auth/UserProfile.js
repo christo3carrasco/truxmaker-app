@@ -40,16 +40,14 @@ export default function UserProfile() {
           <Text style = {styes.CardCardTextTitle}>Añadir tarjeta</Text>
           {/* <Text style = {styes.CardCardTextSubTitle}>Añade una nueva tarjeta para realizar todas tus compras</Text> */}
         </Pressable>
-        <Pressable style = {styes.CardEditInfo} onPress={()=>{goToEditInfo()}}>
+        {/* <Pressable style = {styes.CardEditInfo} onPress={()=>{goToEditInfo()}}>
           <Icon name='edit' size={30} color={'#333333'}/>
           <Text style = {styes.CardEditTextTitle}>Editar Información</Text>
-          {/* <Text style = {styes.CardEditTextSubTitle}>Edita tu información de contacto queremos concerta más</Text> */}
         </Pressable>
         <Pressable style = {styes.CardFavorites} onPress={()=>{goToFavorites()}}>
           <Icon name='heart' size={30} color={'#333333'}/>
           <Text style = {styes.CardFavoritesTextTitle}>Tus favoritos</Text>
-          {/* <Text style = {styes.CardFavoritesTextSubTitle}>Mira tu lista de productos favoritos</Text> */}
-        </Pressable>
+        </Pressable> */}
       </View>
   
     </SafeAreaView>

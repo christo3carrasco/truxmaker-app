@@ -30,7 +30,6 @@ export default function StoreScreen() {
   const goToCart = () => {
     navigate.navigate('Cart')
   } 
-  console.log(cart.productsCart.length);
   return (
     <SafeAreaView style = {styles.StoreScreen}>
       <View style = {styles.StoreTitleContainer}>
@@ -40,13 +39,18 @@ export default function StoreScreen() {
           <Pressable style = {styles.StoreCart} onPress={()=>{goToCart()}}>
               <Icon name='shopping-basket' color={'#264653'} size={25} onPress={()=>{goToCart()}}/>
               {
-                cart.productsCart.length == 0?<></>:(
-                <View style = {styles.countItems} >
-                  <Text>
-                    {cart.productsCart.length}
-                  </Text>
-                </View>
-                )
+                cart!=undefined?(<>
+                  {
+                    cart.productsCart.length == 0?<></>:(
+                    <View style = {styles.countItems} >
+                      <Text>
+                        {cart.productsCart.length}
+                      </Text>
+                    </View>
+                    )
+                    
+                  }
+                </>):(<></>) 
               }
           </Pressable>
       </View>

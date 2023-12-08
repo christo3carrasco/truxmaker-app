@@ -1,11 +1,14 @@
 import { View, Text, Modal, Pressable, StyleSheet, Alert } from 'react-native'
 import React, {useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { useData } from '../../../hooks/useData';
 
 export default function CardFormModal(props) {
+    const {setIsLoading, isLoading} = useData();
     const {isVisible, setIsVisible} = props;
     const navigator = useNavigation(); 
     const moveToCardScreen = () => {
+        setIsLoading(true)
         navigator.navigate('Cards')
     }
     return (
@@ -20,7 +23,7 @@ export default function CardFormModal(props) {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Tarjeta agregada con exto !</Text>
+                <Text style={styles.modalText}>Tarjeta agregada con exito !</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => {

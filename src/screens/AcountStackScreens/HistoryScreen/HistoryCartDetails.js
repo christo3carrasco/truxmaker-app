@@ -12,6 +12,7 @@ export default function HistoryCartDetails(props) {
       <View style = {styles.HistoryCartDetailsInfo}>
         <Text style = {styles.HistoryCartDetailsSubTitle}> id: {params.cart.id}</Text>
         <Text style = {styles.HistoryCartDetailsSubTitle} > fecha: {params.cart.date}</Text>
+        <Text style = {styles.HistoryCartDetailsSubTitle}> tarjeta: {params.cart.idCard}</Text>
         <Text style = {styles.HistoryCartDetailsSubTitle}> total: {params.cart.total}</Text>
       </View>
       <ScrollView style = {styles.HistoryCartDetailsProductsList}>

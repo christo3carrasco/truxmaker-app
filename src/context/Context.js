@@ -29,6 +29,8 @@ export const ProviderContext = ({children}) => {
   const [cart, setCart] = useState({}); 
   const [isLoading, setIsLoading] = useState(); 
 
+  
+
   useEffect(()=>{
     onAuthStateChanged(authPersistence, currentUser =>{
       setUserCredentials(currentUser);
@@ -49,12 +51,20 @@ export const ProviderContext = ({children}) => {
   
   // Login, register and logout with email and password
   const RegisterWithEmailAndPassword = async( email, password) => {
-    const registerCredentials = await createUserWithEmailAndPassword(authPersistence, email, password);
-    return registerCredentials; 
+    try {
+      const registerCredentials = await createUserWithEmailAndPassword(authPersistence, email, password);
+      return registerCredentials; 
+    } catch (error) {
+      return error.message;
+    }
   } 
   
   const LoginWithEmailAndPassword = async(email, password) => {
-    await signInWithEmailAndPassword(authPersistence, email, password); 
+    try {
+      await signInWithEmailAndPassword(authPersistence, email, password); 
+    } catch (error) {
+      return error.message; 
+    }
   } 
   const LogOutWithEmailAndPassword = async() =>{
     setUserInfoDB(user);

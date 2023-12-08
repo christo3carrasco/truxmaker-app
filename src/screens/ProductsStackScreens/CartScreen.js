@@ -34,9 +34,11 @@ export default function CartScreen() {
       onEndReachedThreshold={0.1}
     />
     <View style = {styles.TotalContainer}>
-      <Text style = {styles.TotalText}> Total {cart.total.toFixed(2)}</Text>
+      {cart != undefined ?(<>
+        <Text style = {styles.TotalText}> Total {cart.total.toFixed(2)}</Text>
+      </>):(<></>) }
       <Pressable style = {styles.ButtonPay} onPress={()=>{goToPayment()}}>
-        <Text style = {styles.ButtonText}>Realizar el pago</Text>
+        <Text style = {styles.ButtonText}>Continuar</Text>
         <Icon name='credit-card' size={15}/>
       </Pressable>
     </View>

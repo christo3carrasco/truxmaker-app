@@ -20,7 +20,6 @@ export default function Navigation() {
     <Tab.Navigator>
       <Tab.Screen name = 'Home' component={ HomeNavigation } options={{
         tabBarLabel:"Home",
-        tabBarBadge:`${state}`,
         tabBarIcon: ({color, size}) => {
           return(
             <Icon name = 'home' color = {'#264653'} size = {size} />

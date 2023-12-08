@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function Login(props) {
     const { LoginWithEmailAndPassword, LoginWithGoogleAccount } = useData(); 
+    const [ error, setError ] = useState(null)
     // Login with email and password
     const [tempUser,SetTempUser] = useState({
         email:'', 
@@ -14,7 +15,11 @@ export default function Login(props) {
         SetTempUser({...tempUser, [nameInput]:e})
     }
     const handleSubmit = async() => {
-        await LoginWithEmailAndPassword(tempUser.email, tempUser.password); 
+        const tempError = await LoginWithEmailAndPassword(tempUser.email, tempUser.password); 
+            setError(tempError)
+            setTimeout(()=>{
+                setError(null)
+            },4000)
     }
     // Login with Google
     const handleSubmitGoogle = async() => {
@@ -29,19 +34,15 @@ export default function Login(props) {
         </View>
         <View style = {styles.Form}>
             <TextInput style = {styles.Input} placeholder='correo@gmail.com' onChangeText={(e)=>{handleChange(e,'email')}}/>
-            <TextInput style = {styles.Input} placeholder='*****************'  onChangeText={(e)=>{handleChange(e,'password')}}/>
+            <TextInput secureTextEntry={true} style = {styles.Input} placeholder='*****************'  onChangeText={(e)=>{handleChange(e,'password')}}/>
             <Pressable style = {styles.Button} onPress={()=>{handleSubmit()}}>
                 <Text style = {styles.ButtonText}>Login</Text>
             </Pressable>
-            <Text style = {styles.MoreOptionsSeparator}>o</Text>
-            <Pressable style={styles.Button} onPress={()=>{handleSubmitGoogle()}}>
-                <Icon name='google' size={20} color={'white'}/>
-                <Text style = {styles.ButtonText}>Continuar con google</Text>
-            </Pressable>
-            <Pressable style = {styles.Button}>
-                <Icon name='facebook' size={20} color={'white'}/>
-                <Text style = {styles.ButtonText}>Continuar con facebook</Text>
-            </Pressable>
+            {
+                error != null?(<>
+                    <Text>{error}</Text>
+                </>):(<></>)
+            }
         </View>
     </ScrollView>
     
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         position:'relative',
         backgroundColor:'#F7F7F7',
         width:'100%',
-        height:'auto',
+        height:450,
         paddingTop:35,
         padding:15,
         display:'flex', 
